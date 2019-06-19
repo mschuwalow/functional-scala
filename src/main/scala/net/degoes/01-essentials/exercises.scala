@@ -995,7 +995,7 @@ object typeclasses {
   def root[A: PathLike]: A = PathLike[A].root
 
   root[MyPath] / "foo" / "bar" / "baz" // MyPath
-  (root[MyPath] / "foo").parent        // Option[MyPath]
+  (root[MyPath] / "foo").parent // Option[MyPath]
 
   //
   // EXERCISE 6

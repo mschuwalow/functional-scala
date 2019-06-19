@@ -4,9 +4,9 @@ import io.circe.generic.auto._
 import net.degoes.applications.configuration.DbConfig
 import net.degoes.applications.data.User
 import net.degoes.applications.db.Persistence
-import net.degoes.applications.{TestRuntime, db}
+import net.degoes.applications.{ db, TestRuntime }
 import org.http4s.implicits._
-import org.http4s.{Method, Request, Status, Uri}
+import org.http4s.{ Method, Request, Status, Uri }
 import scalaz.zio._
 import scalaz.zio.interop.catz._
 
@@ -59,10 +59,13 @@ final class HttpSpec extends TestRuntime {
   }
 
   private def provideLivePersistence(zio: TaskR[Persistence, Boolean]) =
-    Persistence.mkTransactor(DbConfig("jdbc:h2:mem:test", "", ""), Platform.executor.asEC, ec).use { transaction =>
-      (db.createTable *> zio).provide(new Persistence.Live {
-        def tnx = transaction
-      })
-    }.supervised
+    Persistence
+      .mkTransactor(DbConfig("jdbc:h2:mem:test", "", ""), Platform.executor.asEC, ec)
+      .use { transaction =>
+        (db.createTable *> zio).provide(new Persistence.Live {
+          def tnx = transaction
+        })
+      }
+      .supervised
 
 }

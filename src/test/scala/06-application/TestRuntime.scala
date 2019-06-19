@@ -1,11 +1,11 @@
 package net.degoes.applications
 
-import java.util.{Timer, TimerTask}
+import java.util.{ Timer, TimerTask }
 import org.specs2.Specification
 import org.specs2.execute.AsResult
-import org.specs2.specification.core.{AsExecution, Execution}
+import org.specs2.specification.core.{ AsExecution, Execution }
 import scala.concurrent.duration._
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 import scalaz.zio._
 
 abstract class TestRuntime extends Specification with DefaultRuntime {
@@ -35,6 +35,5 @@ abstract class TestRuntime extends Specification with DefaultRuntime {
     unsafeRunToFuture(zio.sandbox.mapError(FiberFailure).map(p.success).supervised)
     p.future
   }
-
 
 }

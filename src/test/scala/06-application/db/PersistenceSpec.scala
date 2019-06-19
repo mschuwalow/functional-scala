@@ -2,7 +2,7 @@ package net.degoes.applications.db
 
 import net.degoes.applications.TestRuntime
 import net.degoes.applications.configuration._
-import net.degoes.applications.data.{User, UserNotFound}
+import net.degoes.applications.data.{ User, UserNotFound }
 
 class PersistenceSpec extends TestRuntime {
 
@@ -10,7 +10,6 @@ class PersistenceSpec extends TestRuntime {
     s2"""
       * Persistence Live $e
     """
-
 
   def e =
     Persistence.mkTransactor(DbConfig("jdbc:h2:mem:test", "", ""), Platform.executor.asEC, ec).use { transaction =>

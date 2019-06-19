@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  workspace:
+    build:
+      context: .
+      args:
+        - uid=$COMPOSE_UID
+        - gid=$COMPOSE_GID
+    security_opt: ['label:disable']
+    volumes:
+      - ../:/workspace:Z
+      - vscode-remote:/home/developer/.vscode-server-insiders:Z
+      - ~/.gitconfig:/home/developer/.gitconfig:ro,z
+      - ~/.ssh:/home/developer/.ssh:ro,z
+      - ~/.m2:/home/developer/.m2:z
+      - ~/aim/m3repo:/home/developer/aim/m3repo:z
+    command: sleep infinity
+
+volumes:
+  vscode-remote:

@@ -541,7 +541,7 @@ object parser {
           self.run(input) match {
             case Left(e)           => Left(e)
             case Right((input, a)) => if (f(a)) Right((input, a)) else Left(e0)
-          }
+        }
       )
 
     def |[E2, A1 >: A](that: => Parser[E2, A1]): Parser[E2, A1] =
